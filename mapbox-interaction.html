@@ -26,6 +26,15 @@
 </head>
 
 <body>
+  <!-- add features for geocoding -->
+  <script src=“https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js”></script>
+  <link rel=“stylesheet”
+   href=“https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css”
+   type=“text/css”
+   />
+   <script src=“https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js”></script>
+   <script src=“https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js”></script>
+
   <h1>Studio Week 3<br> Interactions with Mapbox GL JS </h1>
   <!-- Add multiple pages to web page-->
   <!-- active class displays the grey box around current page-->
@@ -37,29 +46,75 @@
   <br>
 
   <div id="map"></div>
-  <script>
+  <div class="map-overlay2" id="features2">
+    <!-- Add fly to button -->
+    <button id="fly">Check out my University, Clark University!</button>
+    <!-- Add pitch & bearing button -->
+    <button id="pitch">Change perspective</button>
+  </div>
 
+  <script>
     // Initialize the map
-    mapboxgl.accessToken = '<your access token here>';
+    mapboxgl.accessToken = 'pk.eyJ1Ijoia3BlY3Nvazk4IiwiYSI6ImNrbGp0Zml4aTA5bjEydWtieXBoanpkMTAifQ.8gD5--vW98H28Jp_HcwUmg';
     var map = new mapboxgl.Map({
       container: 'map', // container id
       style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-      center: [-122.44, 37.76], // starting position [lng, lat]
+      center: [-71.82346, 42.25125], // starting position [lng, lat]
       zoom: 11 // starting zoom
     });
 
     // Add a popup: https://docs.mapbox.com/mapbox-gl-js/example/popup/
+    var popup = new mapboxgl.Popup({ closeOnClick: false })
+        .setLngLat([-71.82346, 42.25125])
+        .setHTML('<h1 style="text-align:center; font-size:32px; height:10px"><u>My University:</u></h1><h1 style="text-align:center; color:red; height:">Clark University</h1>')
+        .addTo(map);
 
     // Add pan and zoom controls: https://docs.mapbox.com/mapbox-gl-js/api/#map#addcontrol
+    map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
     // Add a function that flies to a location: https://docs.mapbox.com/mapbox-gl-js/api/#map#flyto
-
+    document.getElementById('fly').addEventListener('click', function ()
+  {
+    // Flying to Clark University
+    map.flyto({
+       center:[-71.82346, 42.25125],
+       zoom: [15],
+       bearing: 180,
+       pitch: 1,
+       essential: true
+    });
+  });
     // Add a function that sets pitch (tilt) to 60 and bearing (rotation) to 45: https://docs.mapbox.com/mapbox-gl-js/api/#map#setpitch and https://docs.mapbox.com/mapbox-gl-js/api/#map#setbearing
-
+    document.getElementById('pitch').addEventListener('click', function ()
+  {
+    // Flying to Clark University
+    map.flyto({
+      center:[-71.82346, 42.25125],
+      zoom: [10],
+      pitch: 60,
+      bearing: 45,
+      essential: true
+    })
+  })
     // Add a search box: https://docs.mapbox.com/mapbox-gl-js/example/mapbox-gl-geocoder/
-
+    map.addControl(
+         new MapboxGeocoder({
+           accessToken: mapboxgl.accessToken,
+           mapboxgl: mapboxgl,
+       }),'top-left'
+       );
     // Add a geolocation button: https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol
-
+    var geolocate = new mapboxgl.GeolocateControl({
+      positionOptions: {
+          enableHighAccuracy: true
+      },
+      trackUserLocation: true
+    });
+    // Add the control to the map.
+    map.addControl(geolocate);
+    geolocate.on('geolocate', function() {
+      console.log('A geolocate event has occurred.')
+    });
     </script>
 
 </body>
