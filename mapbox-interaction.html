@@ -27,13 +27,13 @@
 
 <body>
   <!-- add features for geocoding -->
-  <script src=“https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js”></script>
-  <link rel=“stylesheet”
-   href=“https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css”
-   type=“text/css”
-   />
-   <script src=“https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js”></script>
-   <script src=“https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js”></script>
+  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
+  <link rel="stylesheet"
+    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
+    type="text/css"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 
   <h1>Studio Week 3<br> Interactions with Mapbox GL JS </h1>
   <!-- Add multiple pages to web page-->
@@ -76,7 +76,7 @@
     document.getElementById('fly').addEventListener('click', function ()
   {
     // Flying to Clark University
-    map.flyto({
+    map.flyTo({
        center:[-71.82346, 42.25125],
        zoom: [15],
        bearing: 180,
@@ -88,7 +88,7 @@
     document.getElementById('pitch').addEventListener('click', function ()
   {
     // Flying to Clark University
-    map.flyto({
+    map.flyTo({
       center:[-71.82346, 42.25125],
       zoom: [10],
       pitch: 60,
