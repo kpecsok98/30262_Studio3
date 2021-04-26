@@ -69,9 +69,6 @@
         .setHTML('<h1 style="text-align:center; font-size:32px; height:10px"><u>My University:</u></h1><h1 style="text-align:center; color:red; height:">Clark University</h1>')
         .addTo(map);
 
-    // Add pan and zoom controls: https://docs.mapbox.com/mapbox-gl-js/api/#map#addcontrol
-    map.addControl(new mapboxgl.NavigationControl(), 'top-left');
-
     // Add a function that flies to a location: https://docs.mapbox.com/mapbox-gl-js/api/#map#flyto
     document.getElementById('fly').addEventListener('click', function ()
   {
@@ -103,6 +100,10 @@
            mapboxgl: mapboxgl,
        }),'top-left'
        );
+
+    // Add pan and zoom controls: https://docs.mapbox.com/mapbox-gl-js/api/#map#addcontrol
+    map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+
     // Add a geolocation button: https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol
     var geolocate = new mapboxgl.GeolocateControl({
       positionOptions: {
